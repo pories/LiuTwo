@@ -1,0 +1,77 @@
+<!--
+First page, there isn't anything really hear due to not being associated to a class (Tab in SF).
+In order for this to get to show up I use standardController="Account" The controller is what tab it shows up to in SF. 
+<apex:page >
+  <h1>Hello World 1</h1>
+  This is your new Page: gold1
+</apex:page>
+
+Second Page: Put this in the account page layout it is under visual force pages.
+<apex:page standardController="Account">
+    {! $User.FirstName} <br/>
+    {! $User.LastName} <br/>
+    You are viewing the account of: {! Account.Name}
+</apex:page>
+
+Third
+Pageblock is just a section or block on the page. You can add a title to the block if you want to. 
+Apex detail will let us show all the related lists. You can then add attribute to it. We can put the owner of the account 
+Then if you use 
+relatedList="false" it will remove related lists.
+title="false" it will remove the title, but that isn't something I am using. This is for the big title at the tip. 
+
+<apex:page standardController="Account">
+<apex:pageBlock title="Hi SF user: {!$User.FirstName }">
+You are viewing the account of: {! Account.Name}.
+</apex:pageBlock>
+<apex:detail subject="{!Account.owner.Id}" relatedList="true" title="false">
+
+</apex:detail>
+</apex:page> 
+
+
+Fourth 
+Create a tab panel. Put the related list of the account, stop scrolling for this. 
+<apex:tabPanel> make the space for the tab panel. 
+<apex:tab> label="Details" will show the title (label) as "Details". 
+<apex:detail> This will put the actual info in the tab. 
+To create another tab, copy paste, and then change label to contacts. 
+Contacts are a related list. 
+Works up to here. 
+<apex:relatedList subject="{!Account}" list="cases"> is where it fails due to permission issue. 
+
+This seems to fail due to a SF issue. Takes forever to load, and only shows it a bit.  
+
+
+
+-->
+<apex:page standardController="Account">
+<apex:pageBlock title="Tabs to make this cool!">
+ <apex:tabPanel >
+    <apex:tab label="Details">
+        <apex:detail relatedList="false" title="false">  
+            </apex:detail>   
+    </apex:tab>
+    <apex:tab label="Contacts">
+        <!--
+        <apex:relatedList subject="{!Account}" list="contacts"> 
+            </apex:relatedList>
+        -->
+    </apex:tab>
+
+    <apex:tab label="Cases">
+
+    </apex:tab>
+    <apex:tab label="Opportunities">
+
+    </apex:tab>
+    <apex:tab label="Cases">
+
+    </apex:tab>
+
+ </apex:tabPanel>
+</apex:pageBlock>
+
+    
+
+</apex:page>
